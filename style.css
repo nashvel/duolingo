@@ -1,0 +1,373 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden; /* Hide scrollbars */
+    background-color: #ffffff;
+}
+.duo-green { background-color: #58cc02; }
+.duo-green-text { color: #58cc02; }
+.duo-blue { background-color: #1cb0f6; }
+.duo-blue-text { color: #1cb0f6; }
+.duo-gray-text { color: #777777; }
+
+.slide {
+    min-height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    padding: 2rem;
+}
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+.duo-button {
+    background-color: #58cc02;
+    color: white;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 4px solid #4aa302;
+    transition: all 0.2s ease;
+}
+.duo-button:hover {
+    background-color: #62e002;
+    transform: translateY(-2px);
+}
+
+.duo-button-secondary {
+    background-color: white;
+    color: #58cc02;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #e5e5e5;
+    border-bottom-width: 4px;
+    transition: all 0.2s ease;
+}
+
+.duo-button-secondary:hover {
+    background-color: #f7f7f7;
+    transform: translateY(-2px);
+}
+
+#progress-bar {
+    background-color: #58cc02; /* Duolingo Green */
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Style for disabled continue button */
+#continue-btn:disabled {
+    background-color: #e5e5e5;
+    color: #afafaf;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+/* --- Desktop Monitor Frame Style */
+.desktop-monitor {
+    background: #e0e0e0; /* Light grey monitor frame */
+    border-radius: 16px;
+    padding: 12px;
+    padding-bottom: 0;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 550px;
+}
+
+.monitor-screen {
+    width: 100%;
+    padding-bottom: 60%; /* Aspect Ratio */
+    background: #000;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #333;
+}
+
+.monitor-screen img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the screen */
+}
+
+.monitor-stand {
+    width: 40%;
+    height: 25px;
+    background: #d0d0d0;
+    margin: 0 auto;
+    margin-top: -4px; /* Overlap with monitor */
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+    position: relative;
+    z-index: -1;
+    border-left: 1px solid #c0c0c0;
+    border-right: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+/* --- Heuristic Quiz --- */
+.quiz-option {
+    background-color: white;
+    border-color: #e5e7eb;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.quiz-option:hover {
+    border-color: #58a700;
+    transform: translateY(-2px);
+}
+
+.quiz-option.correct {
+    background-color: #dcfce7; /* green-100 */
+    border-color: #22c55e; /* green-500 */
+    color: #166534; /* green-800 */
+    font-weight: bold;
+}
+
+.quiz-option.incorrect {
+    background-color: #fee2e2; /* red-100 */
+    border-color: #ef4444; /* red-500 */
+    color: #991b1b; /* red-800 */
+    font-weight: bold;
+}
+
+.quiz-option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#quiz-feedback.correct p.font-bold {
+    color: #166534; /* green-800 */
+}
+
+#quiz-feedback.incorrect p.font-bold {
+    color: #991b1b; /* red-800 */
+}
+
+/* --- Accessibility Widget --- */
+#accessibility-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#accessibility-toggle {
+    width: 60px;
+    height: 60px;
+    background-color: #58a700;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#accessibility-toggle:hover {
+    transform: scale(1.1);
+}
+
+#accessibility-menu {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 260px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#accessibility-menu.hidden {
+    display: none;
+}
+
+#accessibility-menu .menu-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+#accessibility-menu .option-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#accessibility-menu label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+#accessibility-menu button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#accessibility-menu button:hover {
+    background-color: #e9e9e9;
+}
+
+#accessibility-menu .font-controls {
+    display: flex;
+    gap: 5px;
+}
+
+/* Image Modal Styles */
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.clickable-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#accessibility-menu .font-controls button {
+    width: 30px;
+}
+
+/* --- Accessibility Modes --- */
+body.high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast .slide,
+body.high-contrast .bg-white,
+body.high-contrast .bg-gray-50,
+body.high-contrast .text-left.bg-white {
+    background-color: #000 !important;
+    border-color: #555 !important;
+}
+
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast p,
+body.high-contrast li,
+body.high-contrast span,
+body.high-contrast th,
+body.high-contrast td {
+    color: #fff !important;
+}
+
+body.high-contrast .duo-green-text,
+body.high-contrast .text-green-500 {
+    color: #00ff00 !important;
+}
+
+body.high-contrast [class*="text-gray-"] {
+    color: #f0f0f0 !important;
+}
+
+body.high-contrast .desktop-monitor {
+    background: #333;
+    box-shadow: none;
+}
+
+body.high-contrast .monitor-stand {
+    background: #222;
+}
+
+body.readable-font,
+body.readable-font h1,
+body.readable-font h2,
+body.readable-font h3,
+body.readable-font h4,
+body.readable-font p,
+body.readable-font li,
+body.readable-font span,
+body.readable-font button,
+body.readable-font a,
+body.readable-font th,
+body.readable-font td {
+    font-family: Arial, sans-serif !important;
+}
+
+/* --- Responsive Styles for Mobile --- */
+@media (max-width: 768px) {
+    .slide {
+        padding: 4rem 1rem 1rem 1rem; /* Add top padding to avoid overlap with header */
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+    /* Adjust text sizes to be more readable on mobile */
+    .text-5xl { font-size: 2.5rem; }
+    .text-4xl { font-size: 2rem; }
+    .text-3xl { font-size: 1.75rem; }
+    .text-2xl { font-size: 1.25rem; }
+    .text-xl { font-size: 1.125rem; }
+    .text-lg { font-size: 1rem; }
+
+    /* Specific adjustments for the first slide */
+    .slide:first-child .grid {
+        text-align: center;
+    }
+    .slide:first-child .text-9xl {
+        font-size: 6rem; /* Smaller emoji */
+        margin-top: 1.5rem;
+    }
+
+    /* Adjust mockup content */
+    .text-7xl {
+        font-size: 4rem; /* Smaller Hangul character */
+    }
+    
+    #page-footer {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* --- Mockup Animation Styles --- */
+.mockup-after {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(20px);
+}
+
+.mockup-after.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}

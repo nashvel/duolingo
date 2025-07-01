@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+
+    <!-- Main Header (for first slide) -->
+    <header id="main-header" class="absolute top-0 left-0 w-full p-8 flex justify-between items-center z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 275 70" class="h-8" id="duolingo">
+            <g id="g3" style="fill:none;stroke:#78c800;stroke-width:9px">
+                <path d="m 34,0 0,30 a 14.5,14.5 1 1 0 -29,0 14.5,14.5 1 1 0 29,0 z" id="d"/>
+                <path d="m 70,12 0,21 a 11.5,11.5 0 0 1 -23,0 l 0,-21" id="u"/>
+                <path d="m 111,30 a 14.5,14.5 0 1 0 -29,0 14.5,14.5 0 0 0 29,0 z" id="o1"/>
+                <path d="m 124,0 0,33 a 11,11 0 0 0 11,11 l 7,0" id="l"/>
+                <path d="m 151,14 0,35" id="i"/>
+                <path d="m 155.5,6 a 4.5,4.5 0 0 1 -9,0 4.5,4.5 0 1 1 9,0 z" id="i." style="fill:#78c800;stroke:none"/>
+                <path d="m 188,49 0,-22 a 11,11 0 1 0 -22,0 l 0,22" id="n"/>
+                <path d="m 229,30 a 14.5,14.5 0 0 1 -29,0 14.5,14.5 0 1 1 29,0 l 0,20 a 14.5,14.5 0 0 1 -25,11" id="g"/>
+                <path d="m 270,30 a 14.5,14.5 0 1 0 -29,0 14.5,14.5 0 0 0 29,0 z" id="o2"/>
+            </g>
+        </svg>
+        <div class="text-gray-500 font-bold uppercase tracking-wider">
+            Site Language: English
+        </div>
+    </header>
+
+    <!-- Progress Header (for other slides) -->
+    <header id="progress-header" class="absolute top-0 left-0 w-full p-4 flex items-center gap-4 z-20 hidden">
+        <button id="back-arrow" class="text-gray-400 text-3xl">&larr;</button>
+        <div id="progress-container" class="w-full bg-gray-200 rounded-full h-4">
+            <div id="progress-bar" class="h-4 rounded-full"></div>
+        </div>
+    </header>
+
+    <!-- Slides Container -->
+    <div id="slides-container">
+        <!-- Slide 1: Homepage -->
+        <div class="slide active !items-stretch">
+            <div class="flex-1 hidden md:flex items-center justify-center p-8">
+                <div class="flex items-center gap-8">
+                    <!-- Duolingo GIF -->
+                    <img src="https://media.tenor.com/z168S__FUKcAAAAi/duolingo.gif" alt="Duolingo mascot dancing" class="w-40 h-40">
+                    <!-- Presented By Text Card -->
+                    <div class="text-left bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                        <h2 class="text-2xl font-extrabold duo-green-text mb-4 border-b pb-2">Group diko alam</h2>
+                        <div class="text-gray-800">
+                            <div class="mb-4">
+                                <p class="font-bold text-xl text-gray-900">Vj Batal</p>
+                                <p class="text-md font-semibold duo-green-text">Leader</p>
+                            </div>
+                            <ul class="space-y-2 text-lg text-gray-700">
+                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Junnicet Santing</span></li>
+                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Kyle Vestal</span></li>
+                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jep Domingo</span></li>
+                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jay Nashvel Quiblat</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 flex items-center justify-center">
+                <div class="text-center max-w-sm">
+                    <h1 class="text-3xl font-extrabold text-gray-700 mb-8">The free, fun, and effective way to learn a language!</h1>
+                    <a href="#" class="duo-button get-started-btn w-full block mb-4">Get Started</a>
+                    <a href="#" id="already-have-account-btn" class="duo-button-secondary w-full block">I already have an account</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Duolingo? -->
+        <div class="slide bg-white">
+            <div class="p-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-left">
+                    <h2 class="text-4xl font-extrabold duo-green-text mb-6">What is Duolingo?</h2>
+                    <p class="text-xl text-gray-600">
+                        Duolingo is the world's most popular language-learning platform. It's designed to feel like a game, making learning fun, engaging, and effective.
+                    </p>
+                </div>
+                <!-- Desktop Monitor and GIF -->
+                <div class="flex flex-col justify-center items-center p-4">
+                    <!-- Desktop Monitor Frame -->
+                    <div class="desktop-monitor mb-6">
+                        <div class="monitor-screen">
+                            <img src="assets/whatisduolingo.png" alt="Screenshot of the Duolingo application interface">
+                        </div>
+                        <div class="monitor-stand"></div>
+                    </div>
+                    <!-- Duolingo GIF -->
+                    <img src="https://c.tenor.com/RMcvgyGp1FkAAAAC/duolingo-language-app.gif" alt="Duolingo mascot waving" class="w-32 h-32">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Evaluation Methods -->
+        <div class="slide bg-white">
+            <div class="p-8 max-w-7xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4 text-center">Evaluation Methods Used</h2>
+                <h3 class="text-2xl font-bold duo-gray-text mb-8 text-center">1. Cognitive Walkthrough</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Step 1 Card -->
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h4 class="text-lg font-bold duo-gray-text mb-3 text-center">Step 1: Selecting Course</h4>
+                        <div class="w-40 h-80 mx-auto rounded-xl flex items-center justify-center mb-3 overflow-hidden border">
+                            <img src="assets/step1.png" alt="Screenshot of selecting a course" class="w-full h-full object-cover clickable-image">
+                        </div>
+                        <p class="text-base text-gray-700">The user easily selected “Korean” and tapped “Start Lesson.” The interface was intuitive. <span class="text-green-500">✅ No confusion.</span></p>
+                    </div>
+            
+                    <!-- Step 2 Card -->
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h4 class="text-lg font-bold duo-gray-text mb-3 text-center">Step 2: Learning “ㄱ”</h4>
+                        <div class="w-40 h-80 mx-auto rounded-xl flex items-center justify-center mb-3 overflow-hidden border">
+                            <img src="assets/step2.png" alt="Screenshot of learning a character" class="w-full h-full object-cover clickable-image">
+                        </div>
+                        <p class="text-base text-gray-700">The app presented the character with its sound, but lacked a phonetic spelling (e.g., g/k), which could confuse beginners.</p>
+                    </div>
+            
+                    <!-- Step 3 Card -->
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h4 class="text-lg font-bold duo-gray-text mb-3 text-center">Step 3: Matching Character</h4>
+                        <div class="w-40 h-80 mx-auto rounded-xl flex items-center justify-center mb-3 overflow-hidden border">
+                            <img src="assets/step3.png" alt="Screenshot of matching a character" class="w-full h-full object-cover clickable-image">
+                        </div>
+                        <p class="text-base text-gray-700">Matching the character was straightforward, but repeated mistakes didn't offer any extra help or hints.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Field Study -->
+        <div class="slide bg-white">
+            <div class="text-left p-8 max-w-4xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4">Evaluation Methods Used</h2>
+                <h3 class="text-2xl font-bold duo-gray-text mb-2">2. Field Study / Naturalistic Observation</h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    One of our group members acted as the evaluator, observing another groupmate (a beginner in Korean) using Duolingo in a natural setting (home environment). The evaluator did not provide assistance, only observed and took notes.
+                </p>
+                <h4 class="text-xl font-bold duo-gray-text mb-2">Evaluator’s Observations:</h4>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li>The user was engaged but confused by unfamiliar Hangul symbols.</li>
+                    <li>They often replayed the audio to understand pronunciation, showing a need for clearer phonetic cues.</li>
+                    <li>After finishing the lesson, the user asked if their progress was saved, indicating uncertainty.</li>
+                    <li>The user was frustrated by mistakes that were marked wrong without any explanation or hint.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Pop Quiz (Demonstrating Usability Issues) -->
+        <div class="slide bg-gray-50">
+            <div class="p-8 max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-2">Complete the sentence</h2>
+                <img src="assets/quiz.png" alt="A cup of coffee" class="w-40 h-40 mx-auto my-4">
+                <p class="text-2xl text-gray-800 mb-8" id="sentence-line"><span class="font-bold">_______ 주세요.</span></p>
+
+                <div id="quiz-options" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">
+                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-correct="true">커피</button>
+                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">차</button>
+                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">빙수</button>
+                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">주스</button>
+                </div>
+
+                <div id="quiz-feedback" class="mt-6 text-lg hidden">
+                    <p class="font-bold"></p>
+                    <p></p>
+                    <button id="retry-quiz-btn" class="duo-button-secondary mt-4">Retry Quiz</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 7: Suggestions -->
+        <div class="slide bg-white">
+            <div class="text-left p-8 max-w-4xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4">Suggestions for Improvement</h2>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li>Add phonetic spellings and clearer pronunciation guidance in Hangul lessons.</li>
+                    <li>Show a “Lesson Completed” message or checkmark to confirm saved progress.</li>
+                    <li>Provide brief explanations or hints after a user makes a mistake.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Mockup for Pronunciation -->
+        <div class="slide bg-white mockup-slide">
+            <div class="text-center p-8 max-w-6xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4">Design Suggestion: Improving Pronunciation</h2>
+                <p class="text-lg text-gray-600 mb-8">Adding a clear phonetic guide below new characters.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Before -->
+                    <div>
+                        <h3 class="text-2xl font-bold duo-gray-text mb-4">Before</h3>
+                        <div class="bg-gray-100 border-2 border-gray-200 rounded-xl p-8">
+                            <p class="text-lg text-gray-800 mb-6">Which one is this sound?</p>
+                            <div class="flex justify-center items-center mb-8">
+                                <span class="text-7xl font-bold">ㄱ</span>
+                                <button class="ml-4 text-3xl text-blue-500">🔊</button>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㅏ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl bg-blue-100 border-blue-400">ㄱ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㄴ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㄷ</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- After -->
+                    <div class="mockup-after">
+                        <h3 class="text-2xl font-bold duo-green-text mb-4">After (Our Suggestion)</h3>
+                        <div class="bg-green-50 border-2 border-green-300 rounded-xl p-8">
+                            <p class="text-lg text-gray-800 mb-6">Which one is this sound?</p>
+                            <div class="text-center mb-8">
+                                <div class="flex justify-center items-center">
+                                    <span class="text-7xl font-bold">ㄱ</span>
+                                    <button class="ml-4 text-3xl text-blue-500">🔊</button>
+                                </div>
+                                <p class="text-2xl text-gray-600 font-semibold mt-2">(g / k)</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㅏ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl bg-blue-100 border-blue-400">ㄱ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㄴ</button>
+                                <button class="p-4 border-2 rounded-lg text-2xl">ㄷ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Mockup for Lesson Completion -->
+        <div class="slide bg-white mockup-slide">
+            <div class="text-center p-8 max-w-6xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4">Design Suggestion: Clearer Completion</h2>
+                <p class="text-lg text-gray-600 mb-8">Adding explicit confirmation that the lesson is saved.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Before -->
+                    <div>
+                        <h3 class="text-2xl font-bold duo-gray-text mb-4">Before</h3>
+                        <div class="bg-gray-100 border-2 border-gray-200 rounded-xl p-8 text-center">
+                            <p class="text-4xl">🎉</p>
+                            <p class="text-xl font-bold text-yellow-500 mt-2">You earned 15 XP</p>
+                            <div class="mt-4">
+                                <p class="text-lg font-bold text-blue-500">Combo Bonus +5 XP</p>
+                            </div>
+                            <button class="duo-button mt-8 w-full">Continue</button>
+                        </div>
+                    </div>
+                    <!-- After -->
+                    <div class="mockup-after">
+                        <h3 class="text-2xl font-bold duo-green-text mb-4">After (Our Suggestion)</h3>
+                        <div class="bg-green-50 border-2 border-green-300 rounded-xl p-8 text-center">
+                            <p class="text-5xl text-green-500">✔</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-2">Lesson Complete!</p>
+                            <p class="text-lg text-gray-600">Your progress has been saved.</p>
+                            <hr class="my-4">
+                            <p class="text-xl font-bold text-yellow-500">You earned 20 XP</p>
+                            <button class="duo-button mt-6 w-full">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Mockup for Error Feedback -->
+        <div class="slide bg-white mockup-slide">
+            <div class="text-center p-8 max-w-6xl mx-auto">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-4">Design Suggestion: Better Error Feedback</h2>
+                <p class="text-lg text-gray-600 mb-8">Providing helpful explanations for mistakes.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Before -->
+                    <div>
+                        <h3 class="text-2xl font-bold duo-gray-text mb-4">Before</h3>
+                        <div class="bg-red-100 border-2 border-red-300 rounded-xl p-6">
+                            <p class="text-lg font-bold text-red-600">Correct solution:</p>
+                            <p class="text-xl text-red-700 mt-2">남자는 밥을 먹습니다</p>
+                        </div>
+                    </div>
+                    <!-- After -->
+                    <div class="mockup-after">
+                        <h3 class="text-2xl font-bold duo-green-text mb-4">After (Our Suggestion)</h3>
+                        <div class="bg-red-100 border-2 border-red-300 rounded-xl p-6 relative">
+                             <p class="text-lg font-bold text-red-600">Correct solution:</p>
+                            <p class="text-xl text-red-700 mt-2">남자는 밥을 먹습니다</p>
+                            <div class="mt-4 bg-blue-100 border border-blue-300 rounded-lg p-3 text-left">
+                                <p class="font-bold text-blue-800">💡 Tip:</p>
+                                <p class="text-blue-700">In Korean, the verb (먹습니다 - eats) usually comes at the end of the sentence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Summary & Recommendations -->
+        <div class="slide bg-white">
+            <div class="p-8 max-w-5xl mx-auto w-full">
+                <h2 class="text-3xl font-extrabold duo-green-text mb-6 text-center">Summary of Usability Issues</h2>
+                <div class="overflow-hidden border border-gray-200 rounded-lg shadow-md">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issue</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Affected Screen</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Problem Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lack of Phonetic Guide</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">Hangul Lesson</td>
+                                <td class="px-6 py-4 text-gray-600">Users struggle with correct pronunciation without a clear phonetic reference (e.g., g/k).</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Unclear Lesson Completion</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">End of Lesson</td>
+                                <td class="px-6 py-4 text-gray-600">Users are unsure if their progress is saved, as there is no explicit confirmation message.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">No Error Explanation</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">Incorrect Answer</td>
+                                <td class="px-6 py-4 text-gray-600">Users don't learn from their mistakes because the app only shows the correct answer without hints.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Thank You & Restart -->
+        <div class="slide bg-white">
+            <div class="text-center p-8">
+                <h2 class="text-5xl font-extrabold duo-green-text mb-4">Thank You!</h2>
+                <p class="text-2xl text-gray-600 mb-8">Any Questions?</p>
+                <a href="#" class="duo-button get-started-btn w-auto inline-block">Restart Presentation</a>
+            </div>
+        </div>
+    <!-- Page Footer -->
+    <footer id="page-footer" class="absolute bottom-0 left-0 w-full p-4 border-t-2 border-gray-200 hidden">
+        <div class="max-w-5xl mx-auto flex justify-end">
+            <button id="continue-btn" class="duo-button">Continue</button>
+        </div>
+    </footer>
+
+    <!-- Accessibility Widget -->
+    <div id="accessibility-widget">
+        <button id="accessibility-toggle" title="Accessibility Options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </button>
+        <div id="accessibility-menu" class="hidden">
+            <h4 class="menu-title">Accessibility</h4>
+            <div class="option-group">
+                <label>Contrast</label>
+                <button id="contrast-toggle">High Contrast</button>
+            </div>
+            <div class="option-group">
+                <label>Font Size</label>
+                <div class="font-controls">
+                    <button id="font-decrease" title="Decrease font size">-</button>
+                    <button id="font-increase" title="Increase font size">+</button>
+                </div>
+            </div>
+            <div class="option-group">
+                <label>Font Style</label>
+                <button id="font-toggle">Readable</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center">
+        <span id="modal-close" class="absolute top-4 right-6 text-white text-4xl font-bold cursor-pointer">&times;</span>
+        <img id="modal-image" src="" alt="Enlarged view" class="max-w-[400px] max-h-[85vh] p-4 bg-white rounded-lg">
+    </div>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>

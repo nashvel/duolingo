@@ -1,7 +1,13 @@
 body {
     font-family: 'Nunito', sans-serif;
-    overflow: hidden; /* Hide scrollbars */
     background-color: #ffffff;
+}
+
+/* Prevent scrolling on larger screens where slides are full-page */
+@media (min-width: 769px) {
+    body {
+        overflow: hidden;
+    }
 }
 .duo-green { background-color: #58cc02; }
 .duo-green-text { color: #58cc02; }

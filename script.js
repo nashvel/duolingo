@@ -22,8 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             if (i === index) {
-                // Scroll the active slide to the top, not the window
-                slide.scrollTo(0, 0);
+                // Scroll the active slide to the top with a smooth animation
+                // A small timeout ensures this runs after the slide is fully active
+                setTimeout(() => {
+                    slide.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 0);
             }
         });
 

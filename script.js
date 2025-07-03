@@ -24,8 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i === index) {
                 // When the new slide's fade-in transition finishes, scroll it to the top.
                 // This is the most reliable way to handle the timing.
-                slide.addEventListener('transitionend', () => {
-                    slide.scrollTo({ top: 0, behavior: 'smooth' });
+                slide.addEventListener('transitionend', (event) => {
+                    // Ensure we only scroll when the opacity transition is complete.
+                    if (event.propertyName === 'opacity') {
+                        slide.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 }, { once: true });
             }
         });

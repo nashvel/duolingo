@@ -14,18 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNextBtn = document.getElementById('mobile-next-btn');
     const scrollIndicator = document.getElementById('scroll-indicator');
     let currentSlide = 0;
-    let scrollListener = null; // To hold a reference to our scroll listener
 
     function updateUI(index) {
-        // Scroll to top of the page on slide change
-        window.scrollTo(0, 0);
-
         document.querySelectorAll('.mockup-after').forEach(el => {
             el.classList.remove('visible');
         });
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
+            if (i === index) {
+                // Scroll the active slide to the top, not the window
+                slide.scrollTo(0, 0);
+            }
         });
+
         const isFirstSlide = index === 0;
         mainHeader.style.display = isFirstSlide ? 'flex' : 'none';
         progressHeader.style.display = isFirstSlide ? 'none' : 'flex';
@@ -42,24 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollSlides = [2, 3]; // Slides 3 and 4
             const isMobile = window.innerWidth <= 768;
             const needsIndicator = isMobile && scrollSlides.includes(index);
+            const activeSlide = slides[index];
 
-            // Always remove the previous listener to prevent duplicates
-            if (scrollListener) {
-                window.removeEventListener('scroll', scrollListener);
-            }
-
-            if (needsIndicator) {
+            if (needsIndicator && activeSlide) {
                 scrollIndicator.classList.remove('hidden');
 
-                // Define the new listener
-                scrollListener = () => {
+                const hideOnScroll = () => {
                     scrollIndicator.classList.add('hidden');
-                    window.removeEventListener('scroll', scrollListener);
                 };
 
                 // Delay attaching the listener to avoid the programmatic scroll-to-top
                 setTimeout(() => {
-                    window.addEventListener('scroll', scrollListener, { once: true });
+                    activeSlide.addEventListener('scroll', hideOnScroll, { once: true });
                 }, 100);
             } else {
                 scrollIndicator.classList.add('hidden');

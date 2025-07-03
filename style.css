@@ -430,7 +430,15 @@ body.high-contrast {
 
 /* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
-        /* Responsive Table Styles */
+    .slide {
+        height: 100vh; /* Use fixed height to define scroll container */
+        overflow-y: auto; /* Allow vertical scrolling within the slide */
+        align-items: flex-start; /* Align content to the top */
+        padding-top: 6rem; /* Add padding for header and space */
+        padding-bottom: 6rem; /* Add padding for footer and space */
+    }
+
+    /* Responsive Table Styles */
     .responsive-table thead {
         display: none;
     }

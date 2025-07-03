@@ -19,16 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.mockup-after').forEach(el => {
             el.classList.remove('visible');
         });
+        // --- Final, Robust Scrolling Logic ---
+        // First, toggle the 'active' class on all slides.
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
-            if (i === index) {
-                // The CSS transition for opacity is 500ms. We will wait for that to finish
-                // before scrolling. This is a more direct and forceful approach.
-                setTimeout(() => {
-                    slide.scrollTo({ top: 0, behavior: 'auto' }); // 'auto' is instant
-                }, 500);
-            }
         });
+
+        const newSlide = slides[index];
+        if (newSlide) {
+            // Force the browser to reflow and apply the 'active' class change immediately.
+            // Reading a layout property like offsetHeight does this.
+            void newSlide.offsetHeight;
+
+            // Now that the slide is guaranteed to be active and scrollable, scroll to top.
+            newSlide.scrollTo({ top: 0, behavior: 'auto' });
+        }
 
         const isFirstSlide = index === 0;
         mainHeader.style.display = isFirstSlide ? 'flex' : 'none';

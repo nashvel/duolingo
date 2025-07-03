@@ -436,6 +436,7 @@ body.high-contrast {
         align-items: flex-start; /* Align content to the top */
         padding-top: 6rem; /* Add padding for header and space */
         padding-bottom: 6rem; /* Add padding for footer and space */
+        transition: none; /* INSTANT CHANGE: Disable fade animation on mobile to fix scroll bug. */
     }
 
     /* Responsive Table Styles */

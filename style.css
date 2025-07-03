@@ -265,9 +265,348 @@ body {
 }
 
 /* --- Accessibility Modes --- */
+/* Romanization Style */
+.romanization {
+    color: #6b7280; /* gray-500 */
+    font-size: 0.875rem; /* text-sm */
+    font-style: italic;
+}
+
+/* --- Accessibility Modes --- */
 body.high-contrast {
     background-color: #000 !important;
     color: #fff !important;
+}
+
+/* Custom Dropdown Styles for Quiz */
+#quiz-settings-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+    top: -5px; /* Adjust position to align better */
+}
+
+#quiz-settings-btn:hover {
+    background-color: #f0f0f0;
+}
+
+#quiz-settings-btn svg {
+    fill: #58cc02; /* Duolingo green */
+}
+
+#play-sentence-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+#play-sentence-btn:hover {
+    opacity: 1;
+}
+
+#sentence-romanization {
+    font-style: italic;
+    color: #777777; /* A slightly lighter gray for subtlety */
+}
+
+#sentence-translation {
+    font-style: italic;
+    color: #4b5563; /* text-gray-600 */
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.quiz-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1cb0f6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: max-content;
+    max-width: 90%;
+    z-index: 20;
+    margin-bottom: 10px;
+}
+
+.quiz-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: #1cb0f6 transparent transparent transparent;
+}
+
+#quiz-tip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1cb0f6; /* Duolingo blue */
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: max-content;
+    max-width: 280px;
+    z-index: 20;
+    margin-bottom: 12px; /* Space between tip and its anchor */
+    text-align: left;
+    font-style: normal; /* Override italic style */
+}
+
+#quiz-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: #1cb0f6 transparent transparent transparent;
+}
+
+.tip-button {
+    background-color: #1cb0f6;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+}
+
+.duo-dropdown-content {
+    background-color: #fff !important;
+    border: 2px solid #e5e5e5 !important;
+    border-radius: 16px !important; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    width: 220px !important;
+    padding: 8px 0 !important;
+    /* Resetting Tailwind utility classes */
+}
+
+.duo-dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 700 !important;
+    color: #4c4c4c !important;
+    padding: 12px 16px !important;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.duo-dropdown-item:hover {
+    background-color: #f7f7f7 !important;
+}
+
+
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+        /* Responsive Table Styles */
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+    .responsive-table td {
+        display: block;
+        padding: 1rem; /* Increase padding for more space */
+        text-align: left;
+        white-space: normal;
+        border: none;
+    }
+
+    /* Add a divider line between the data points within a card */
+    .responsive-table td:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb; /* Use the existing border color */
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem; /* More space between label and value */
+        font-size: 0.75rem; /* 12px */
+        color: #6b7280; /* Gray text for the label */
+        text-transform: uppercase;
+        letter-spacing: .05em;
+    }
+
+    .responsive-table td:last-child {
+        border-bottom: 0;
+    }
+
+    .responsive-table tr:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Center Thank You slide content on mobile */
+    .thank-you-slide {
+        display: flex !important; /* Ensure flex is applied */
+        justify-content: center !important; /* Vertical centering */
+        align-items: center !important; /* Horizontal centering */
+        min-height: 75vh; /* Use viewport height for robust centering */
+        text-align: center !important; /* Force text center for all children */
+    }
+
+    #scroll-indicator {
+        animation: bounce-subtle 2s infinite;
+    }
+    /* General Slide Adjustments */
+    .slide {
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+        justify-content: flex-start; /* Align content to the top */
+        padding-top: 6rem; /* More space for header */
+        height: auto; /* Allow slide to grow */
+        min-height: 100vh;
+    }
+
+    .slide.active {
+        overflow-y: auto; /* Allow scrolling on small screens */
+    }
+
+    /* Homepage (Slide 1) */
+
+
+    /* Headings and Text */
+    h1.text-3xl, h2.text-3xl, h2.text-4xl {
+        font-size: 1.875rem; /* ~30px */
+        line-height: 2.25rem;
+    }
+
+    p.text-xl, p.text-lg {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    /* General Grid and Flex Layouts */
+    .grid.md\:grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid.md\:grid-cols-2 > div {
+        text-align: center;
+    }
+
+    /* Quiz Slide */
+    #quiz-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    .quiz-option {
+        padding: 1rem;
+        font-size: 1.125rem;
+    }
+    
+    #sentence-line h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Desktop Monitor Mockup */
+    .desktop-monitor {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Main Header */
+    #main-header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    #main-header .h-8 {
+        height: 1.75rem; /* Larger logo for better visibility */
+    }
+    #main-header .text-gray-500 {
+        font-size: 0.75rem;
+    }
+    
+    /* Progress Header */
+    #progress-header {
+        padding: 0.5rem;
+    }
+
+    /* Footer */
+    #page-footer {
+        padding: 1rem;
+    }
+
+    /* Tables */
+    .overflow-hidden.border {
+        overflow-x: auto; /* Add horizontal scroll to tables */
+    }
+    
+    table {
+        font-size: 0.875rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+/* Custom Checkbox Styles */
+.duo-dropdown-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #afafaf;
+    border-radius: 4px;
+    margin-right: 12px;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.duo-dropdown-item input[type="checkbox"]:checked {
+    background-color: #58cc02; /* Duolingo green */
+    border-color: #58cc02;
+}
+
+.duo-dropdown-item input[type="checkbox"]:checked::after {
+    content: '\2713'; /* Checkmark character */
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 body.high-contrast .slide,

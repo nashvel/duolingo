@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
@@ -40,40 +41,49 @@
         </div>
     </header>
 
-    <!-- Slides Container -->
-    <div id="slides-container">
-        <!-- Slide 1: Homepage -->
-        <div class="slide active !items-stretch">
-            <div class="flex-1 hidden md:flex items-center justify-center p-8">
-                <div class="flex items-center gap-8">
-                    <!-- Duolingo GIF -->
-                    <img src="https://media.tenor.com/z168S__FUKcAAAAi/duolingo.gif" alt="Duolingo mascot dancing" class="w-40 h-40">
-                    <!-- Presented By Text Card -->
-                    <div class="text-left bg-white p-6 rounded-xl shadow-md border border-gray-200">
-                        <h2 class="text-2xl font-extrabold duo-green-text mb-4 border-b pb-2">Group diko alam</h2>
-                        <div class="text-gray-800">
-                            <div class="mb-4">
-                                <p class="font-bold text-xl text-gray-900">Vj Batal</p>
-                                <p class="text-md font-semibold duo-green-text">Leader</p>
-                            </div>
-                            <ul class="space-y-2 text-lg text-gray-700">
-                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Junnicet Santing</span></li>
-                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Kyle Vestal</span></li>
-                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jep Domingo</span></li>
-                                <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jay Nashvel Quiblat</span></li>
-                            </ul>
-                        </div>
-                    </div>
+<!-- Slide 1: Homepage -->
+<div class="slide active">
+    <div class="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-center gap-8 p-4 md:p-8">
+        
+        <!-- Left Column: Presentation Info -->
+        <div class="flex flex-col items-center gap-8 w-full md:w-auto">
+            <!-- Wrapper for GIF and QR -->
+            <div id="gif-qr-wrapper" class="flex items-center justify-center gap-4">
+                <!-- Duolingo GIF -->
+                <img src="https://media.tenor.com/z168S__FUKcAAAAi/duolingo.gif" alt="Duolingo mascot dancing" class="w-28 h-28 md:w-40 md:h-40">
+                <!-- QR Code -->
+                <div class="text-center">
+                    <img src="assets/qrcode.png" alt="QR Code for project" class="w-28 h-28 md:w-40 md:h-40 rounded-lg shadow-md border border-gray-200 clickable-image">
+                    <p class="mt-2 text-sm font-semibold text-gray-600">Scan Me!</p>
                 </div>
             </div>
-            <div class="flex-1 flex items-center justify-center">
-                <div class="text-center max-w-sm">
-                    <h1 class="text-3xl font-extrabold text-gray-700 mb-8">The free, fun, and effective way to learn a language!</h1>
-                    <a href="#" class="duo-button get-started-btn w-full block mb-4">Get Started</a>
-                    <a href="#" id="already-have-account-btn" class="duo-button-secondary w-full block">I already have an account</a>
+            <!-- Presented By Text Card -->
+            <div class="text-left bg-white p-6 rounded-xl shadow-md border border-gray-200 w-full max-w-md">
+                <h2 class="text-2xl font-extrabold duo-green-text mb-4 border-b pb-2">Group diko alam</h2>
+                <div class="text-gray-800">
+                    <div class="mb-4">
+                        <p class="font-bold text-xl text-gray-900">Vj Batal</p>
+                        <p class="text-md font-semibold duo-green-text">Leader</p>
+                    </div>
+                    <ul class="space-y-2 text-lg text-gray-700">
+                        <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Junnecit Santing</span></li>
+                        <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Lochinvar Kyle Vestal</span></li>
+                        <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jep Domingo</span></li>
+                        <li class="flex items-center gap-3"><span class="text-green-500 text-xs">◆</span><span>Jay Nashvel Quiblat</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
+
+        <!-- Right Column: Call to Action -->
+        <div class="text-center w-full max-w-sm">
+            <h1 class="text-3xl font-extrabold text-gray-700 mb-8">The free, fun, and effective way to learn a language!</h1>
+            <a href="#" class="duo-button get-started-btn w-full block mb-4">Get Started</a>
+            <a href="#" id="already-have-account-btn" class="duo-button-secondary w-full block">I already have an account</a>
+        </div>
+
+    </div>
+</div>
 
         <!-- Slide 2: What is Duolingo? -->
         <div class="slide bg-white">
@@ -156,21 +166,59 @@
 
         <!-- Slide 5: Pop Quiz (Demonstrating Usability Issues) -->
         <div class="slide bg-gray-50">
-            <div class="p-8 max-w-2xl mx-auto text-center">
+                        <div class="p-8 max-w-2xl mx-auto text-center relative">
                 <h2 class="text-3xl font-extrabold duo-green-text mb-2">Complete the sentence</h2>
+                <p class="text-lg text-gray-600 mb-4">Task: Complete the sentence "Please give me a coffee."</p>
                 <img src="assets/quiz.png" alt="A cup of coffee" class="w-40 h-40 mx-auto my-4">
-                <p class="text-2xl text-gray-800 mb-8" id="sentence-line"><span class="font-bold">_______ 주세요.</span></p>
-
-                <div id="quiz-options" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">
-                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-correct="true">커피</button>
-                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">차</button>
-                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">빙수</button>
-                    <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold">주스</button>
+                <div class="mb-8 text-center relative">
+                    <p class="text-2xl text-gray-800 inline-flex items-center justify-center gap-2" id="sentence-line">
+                        <span id="sentence-text" class="font-bold">_______ 주세요.</span>
+                        <button id="play-sentence-btn" class="hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 0 24 24" width="28px" fill="#1cb0f6">
+                                <path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                    </p>
+                    <div id="quiz-hint" class="quiz-popup hidden">Hint: A popular morning beverage.</div>
+                    <p id="sentence-romanization" class="text-xl mt-2 invisible">&nbsp;</p>
+                    <p id="sentence-translation" class="text-lg mt-1 invisible">&nbsp;</p>
                 </div>
 
-                <div id="quiz-feedback" class="mt-6 text-lg hidden">
-                    <p class="font-bold"></p>
-                    <p></p>
+                                                <div class="absolute top-4 right-4 z-10">
+                    <div id="quiz-settings-menu" class="relative inline-block text-left">
+                                                <button type="button" id="quiz-settings-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 0 24 24" width="28px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+                        </button>
+                                                <div id="quiz-settings-dropdown" class="duo-dropdown-content origin-top-right absolute right-0 mt-2 hidden" role="menu" aria-orientation="vertical" aria-labelledby="quiz-settings-btn">
+                            <div class="py-1" role="none">
+                                                                                                <label for="romanization-checkbox" class="duo-dropdown-item" role="menuitem" tabindex="-1" id="toggle-romanization">
+                                    <input type="checkbox" id="romanization-checkbox" class="mr-2"> Romanization
+                                </label>
+                                <label for="hint-checkbox" class="duo-dropdown-item" role="menuitem" tabindex="-1" id="toggle-hint">
+                                    <input type="checkbox" id="hint-checkbox" class="mr-2"> Hint
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div id="quiz-options" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">
+                                        <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-correct="true" data-sound="assets/sounds/coffee.mp3" data-romanization="k'eo-pi" data-sentence-sound="assets/sounds/pleasegivemeacoffee.mp3" data-english="coffee">커피</button>
+                                        <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-sound="assets/sounds/tea.mp3" data-romanization="cha" data-sentence-sound="assets/sounds/pleasegivemeatea.mp3" data-english="tea">차</button>
+                                        <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-sound="assets/sounds/bingsu.mp3" data-romanization="bing-su" data-sentence-sound="assets/sounds/pleasegivemebingsu.mp3" data-english="bingsu">빙수</button>
+                                        <button class="quiz-option p-4 border-2 rounded-lg text-2xl font-bold" data-sound="assets/sounds/juice.mp3" data-romanization="ju-seu" data-sentence-sound="assets/sounds/pleasegivemeajuice.mp3" data-english="juice">주스</button>
+                </div>
+
+                <div id="quiz-feedback" class="relative mt-6 text-lg invisible">
+                    <div class="flex items-center justify-center gap-2">
+                        <p class="font-bold">&nbsp;</p>
+                        <div class="relative">
+                            <button id="tip-button" class="tip-button hidden">?</button>
+                            <div id="quiz-tip" class="quiz-popup hidden" style="width: 250px; bottom: 120%; left: 50%; transform: translateX(-50%);">Tip: In Korean, the object (like 'coffee') comes before the verb ('please give').</div>
+                        </div>
+                    </div>
+                    <p class="explanation-text">&nbsp;</p>
                     <button id="retry-quiz-btn" class="duo-button-secondary mt-4">Retry Quiz</button>
                 </div>
             </div>
@@ -306,7 +354,7 @@
             <div class="p-8 max-w-5xl mx-auto w-full">
                 <h2 class="text-3xl font-extrabold duo-green-text mb-6 text-center">Summary of Usability Issues</h2>
                 <div class="overflow-hidden border border-gray-200 rounded-lg shadow-md">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 responsive-table">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issue</th>
@@ -316,19 +364,19 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lack of Phonetic Guide</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">Hangul Lesson</td>
-                                <td class="px-6 py-4 text-gray-600">Users struggle with correct pronunciation without a clear phonetic reference (e.g., g/k).</td>
+                                <td data-label="Issue" class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lack of Phonetic Guide</td>
+                                <td data-label="Affected Screen" class="px-6 py-4 whitespace-nowrap text-gray-600">Hangul Lesson</td>
+                                <td data-label="Problem Description" class="px-6 py-4 text-gray-600">Users struggle with correct pronunciation without a clear phonetic reference (e.g., g/k).</td>
                             </tr>
                             <tr class="bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Unclear Lesson Completion</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">End of Lesson</td>
-                                <td class="px-6 py-4 text-gray-600">Users are unsure if their progress is saved, as there is no explicit confirmation message.</td>
+                                <td data-label="Issue" class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Unclear Lesson Completion</td>
+                                <td data-label="Affected Screen" class="px-6 py-4 whitespace-nowrap text-gray-600">End of Lesson</td>
+                                <td data-label="Problem Description" class="px-6 py-4 text-gray-600">Users are unsure if their progress is saved, as there is no explicit confirmation message.</td>
                             </tr>
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">No Error Explanation</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-600">Incorrect Answer</td>
-                                <td class="px-6 py-4 text-gray-600">Users don't learn from their mistakes because the app only shows the correct answer without hints.</td>
+                                <td data-label="Issue" class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">No Error Explanation</td>
+                                <td data-label="Affected Screen" class="px-6 py-4 whitespace-nowrap text-gray-600">Incorrect Answer</td>
+                                <td data-label="Problem Description" class="px-6 py-4 text-gray-600">Users don't learn from their mistakes because the app only shows the correct answer without hints.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -337,7 +385,7 @@
         </div>
 
         <!-- Slide 11: Thank You & Restart -->
-        <div class="slide bg-white">
+        <div class="slide bg-white thank-you-slide">
             <div class="text-center p-8">
                 <h2 class="text-5xl font-extrabold duo-green-text mb-4">Thank You!</h2>
                 <p class="text-2xl text-gray-600 mb-8">Any Questions?</p>
@@ -385,6 +433,20 @@
     </div>
 
     <script src="script.js" defer></script>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="fixed bottom-0 left-0 right-0 bg-white p-2 border-t border-gray-200 flex justify-between md:hidden z-50">
+        <button id="mobile-prev-btn" class="duo-button-secondary w-1/2 mr-1">Prev</button>
+        <button id="mobile-next-btn" class="duo-button w-1/2 ml-1">Next</button>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div id="scroll-indicator" class="fixed top-20 right-4 hidden md:hidden" style="z-index: 9999;">
+        <img src="assets/arrow.png" alt="Scroll down" class="w-10 h-10 animate-bounce">
+    </div>
+
+
+
 
 </body>
 </html>

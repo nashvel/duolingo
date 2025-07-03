@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Slide Navigation ---
     const slides = document.querySelectorAll('.slide');
     const progressBar = document.getElementById('progress-bar');
     const backArrow = document.getElementById('back-arrow');
@@ -8,32 +9,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainHeader = document.getElementById('main-header');
     const getStartedButtons = document.querySelectorAll('.get-started-btn');
     const alreadyHaveAccountBtn = document.getElementById('already-have-account-btn');
-
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobilePrevBtn = document.getElementById('mobile-prev-btn');
+    const mobileNextBtn = document.getElementById('mobile-next-btn');
+    const scrollIndicator = document.getElementById('scroll-indicator');
     let currentSlide = 0;
+    let scrollListener = null; // To hold a reference to our scroll listener
 
     function updateUI(index) {
-        // Reset all mockup animations before showing the new slide
+        // Scroll to top of the page on slide change
+        window.scrollTo(0, 0);
+
         document.querySelectorAll('.mockup-after').forEach(el => {
             el.classList.remove('visible');
         });
-
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
         });
-
-        // Show/hide headers and footers
         const isFirstSlide = index === 0;
         mainHeader.style.display = isFirstSlide ? 'flex' : 'none';
         progressHeader.style.display = isFirstSlide ? 'none' : 'flex';
         pageFooter.style.display = isFirstSlide ? 'none' : 'block';
 
-        // Update progress bar
+        // Manage mobile navigation state
+        if (mobileNav) {
+            mobileNav.style.display = isFirstSlide ? 'none' : 'flex';
+            mobileNextBtn.disabled = index === slides.length - 1;
+        }
+
+        // Manage scroll indicator for specific slides on mobile
+        if (scrollIndicator) {
+            const scrollSlides = [2, 3]; // Slides 3 and 4
+            const isMobile = window.innerWidth <= 768;
+            const needsIndicator = isMobile && scrollSlides.includes(index);
+
+            // Always remove the previous listener to prevent duplicates
+            if (scrollListener) {
+                window.removeEventListener('scroll', scrollListener);
+            }
+
+            if (needsIndicator) {
+                scrollIndicator.classList.remove('hidden');
+
+                // Define the new listener
+                scrollListener = () => {
+                    scrollIndicator.classList.add('hidden');
+                    window.removeEventListener('scroll', scrollListener);
+                };
+
+                // Delay attaching the listener to avoid the programmatic scroll-to-top
+                setTimeout(() => {
+                    window.addEventListener('scroll', scrollListener, { once: true });
+                }, 100);
+            } else {
+                scrollIndicator.classList.add('hidden');
+            }
+        }
+
         if (slides.length > 1) {
             const progressPercentage = (index / (slides.length - 1)) * 100;
             progressBar.style.width = `${progressPercentage}%`;
         }
-
-        // Disable continue button on the last slide
         continueBtn.disabled = index === slides.length - 1;
     }
 
@@ -53,50 +89,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function attemptNextStep() {
         const activeSlide = slides[currentSlide];
-
-        // Check if it's a mockup slide with a hidden 'after' part
         if (activeSlide.classList.contains('mockup-slide')) {
             const afterMockup = activeSlide.querySelector('.mockup-after');
             if (afterMockup && !afterMockup.classList.contains('visible')) {
                 afterMockup.classList.add('visible');
-                return; // Reveal the 'after' part and wait for the next action
+                // On mobile, scroll to the "After" view when it appears
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        afterMockup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100); // Delay to ensure the element is rendered before scrolling
+                }
+                return;
             }
         }
-
-        // Otherwise, proceed to the next slide
         nextSlide();
     }
 
-    // Event Listeners
     continueBtn.addEventListener('click', attemptNextStep);
     backArrow.addEventListener('click', prevSlide);
-
+    if (mobilePrevBtn) mobilePrevBtn.addEventListener('click', prevSlide);
+    if (mobileNextBtn) mobileNextBtn.addEventListener('click', attemptNextStep);
     getStartedButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             if (currentSlide === slides.length - 1) {
-                currentSlide = 0; // Restart if on last slide
+                currentSlide = 0;
             } else {
                 currentSlide++;
             }
             updateUI(currentSlide);
         });
     });
-
     if (alreadyHaveAccountBtn) {
         alreadyHaveAccountBtn.addEventListener('click', (e) => {
             e.preventDefault();
             alert('no you don`t have');
         });
     }
-
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-            attemptNextStep();
-        } else if (e.key === 'ArrowLeft') {
-            prevSlide();
-        }
+        if (e.key === 'ArrowRight') attemptNextStep();
+        else if (e.key === 'ArrowLeft') prevSlide();
     });
 
     // --- Accessibility Widget Logic ---
@@ -111,100 +143,187 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (accessibilityToggle) {
         accessibilityToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent click from closing menu immediately
+            e.stopPropagation();
             accessibilityMenu.classList.toggle('hidden');
         });
     }
-
     if (contrastToggle) {
-        contrastToggle.addEventListener('click', () => {
-            body.classList.toggle('high-contrast');
-        });
+        contrastToggle.addEventListener('click', () => body.classList.toggle('high-contrast'));
     }
-    
     if (fontToggle) {
-        fontToggle.addEventListener('click', () => {
-            body.classList.toggle('readable-font');
-        });
+        fontToggle.addEventListener('click', () => body.classList.toggle('readable-font'));
     }
-
     if (fontIncrease) {
         fontIncrease.addEventListener('click', () => {
             const currentSize = parseFloat(getComputedStyle(html).fontSize);
             html.style.fontSize = `${currentSize + 1}px`;
         });
     }
-
     if (fontDecrease) {
         fontDecrease.addEventListener('click', () => {
             const currentSize = parseFloat(getComputedStyle(html).fontSize);
             html.style.fontSize = `${currentSize - 1}px`;
         });
     }
-
-    // Close menu if clicking outside
     document.addEventListener('click', (e) => {
         if (accessibilityMenu && !accessibilityMenu.classList.contains('hidden') && !accessibilityMenu.contains(e.target) && !accessibilityToggle.contains(e.target)) {
             accessibilityMenu.classList.add('hidden');
         }
     });
 
+    // --- Quiz Settings Logic ---
+    const quizSettingsBtn = document.getElementById('quiz-settings-btn');
+    const quizSettingsDropdown = document.getElementById('quiz-settings-dropdown');
+    const romanizationCheckbox = document.getElementById('romanization-checkbox');
+
+    const hintCheckbox = document.getElementById('hint-checkbox');
+    const quizHint = document.getElementById('quiz-hint');
+
+    if (quizSettingsBtn) {
+        quizSettingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            quizSettingsDropdown.classList.toggle('hidden');
+        });
+    }
+    document.addEventListener('click', (e) => {
+        if (quizSettingsDropdown && !quizSettingsDropdown.classList.contains('hidden') && !quizSettingsBtn.contains(e.target) && !quizSettingsDropdown.contains(e.target)) {
+            quizSettingsDropdown.classList.add('hidden');
+        }
+    });
+
+    if (romanizationCheckbox) {
+        romanizationCheckbox.addEventListener('change', () => {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                const romanization = option.dataset.romanization;
+                let romanizationEl = option.querySelector('.romanization');
+                if (romanizationCheckbox.checked) {
+                    if (!romanizationEl) {
+                        romanizationEl = document.createElement('span');
+                        romanizationEl.className = 'romanization block text-sm text-gray-500';
+                        option.appendChild(romanizationEl);
+                    }
+                    romanizationEl.textContent = romanization;
+                } else {
+                    if (romanizationEl) {
+                        option.removeChild(romanizationEl);
+                    }
+                }
+            });
+            const sentenceRomanization = document.getElementById('sentence-romanization');
+            const quizFeedback = document.getElementById('quiz-feedback');
+            const isQuizAnswered = quizFeedback && !quizFeedback.classList.contains('invisible');
+            if (isQuizAnswered) {
+                if (romanizationCheckbox.checked) {
+                    const sentenceTextContent = document.getElementById('sentence-text').textContent;
+                    const selectedWord = sentenceTextContent.split(' ')[0];
+                    let selectedRomanization = '';
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        if (opt.firstChild.textContent.trim() === selectedWord) {
+                            selectedRomanization = opt.dataset.romanization;
+                        }
+                    });
+                    if (selectedRomanization) {
+                        sentenceRomanization.textContent = `[${selectedRomanization} juseyo]`;
+                        sentenceRomanization.classList.remove('invisible');
+                    }
+                } else {
+                    sentenceRomanization.classList.add('invisible');
+                }
+            }
+        });
+    }
+
+    if (hintCheckbox) {
+        hintCheckbox.addEventListener('change', () => {
+            quizHint.classList.toggle('hidden', !hintCheckbox.checked);
+        });
+    }
+
     // --- Heuristic Quiz Logic ---
     const quizOptions = document.getElementById('quiz-options');
     const quizFeedback = document.getElementById('quiz-feedback');
     const retryBtn = document.getElementById('retry-quiz-btn');
+    const tipButton = document.getElementById('tip-button');
+    const sentenceText = document.getElementById('sentence-text');
+    const sentenceRomanization = document.getElementById('sentence-romanization');
+    const sentenceTranslation = document.getElementById('sentence-translation');
+    const quizTip = document.getElementById('quiz-tip');
+    const playSentenceBtn = document.getElementById('play-sentence-btn');
+    let currentSentenceSound = null;
 
     if (quizOptions && retryBtn) {
         const options = quizOptions.querySelectorAll('.quiz-option');
 
-        const handleOptionClick = (option) => {
-            // Put selected word in the blank
-            const selectedWord = option.textContent;
-            const sentenceLine = document.getElementById('sentence-line');
-            if (sentenceLine) {
-                sentenceLine.innerHTML = `<span class="font-bold">${selectedWord} 주세요.</span>`;
-            }
-
-            // Disable all options after one is clicked
-            options.forEach(opt => opt.disabled = true);
-
-            const isCorrect = option.getAttribute('data-correct') === 'true';
-            const feedbackText = quizFeedback.querySelector('p:first-of-type');
-            const explanationText = quizFeedback.querySelector('p:last-of-type');
-
-            if (isCorrect) {
-                option.classList.add('correct');
-                feedbackText.textContent = 'Correct!';
-                explanationText.textContent = '"커피" (keopi) means coffee.';
-            } else {
-                option.classList.add('incorrect');
-                feedbackText.textContent = 'Incorrect.';
-                explanationText.textContent = 'The correct answer is highlighted.'; // This is intentionally unhelpful to prove the point
-                // Highlight the correct answer
-                quizOptions.querySelector('[data-correct="true"]').classList.add('correct');
-            }
-            quizFeedback.classList.remove('hidden');
-        };
-
         const resetQuiz = () => {
             options.forEach(opt => {
                 opt.disabled = false;
-                opt.classList.remove('correct', 'incorrect');
+                opt.classList.remove('border-green-500', 'bg-green-100', 'border-red-500', 'bg-red-100');
             });
-            quizFeedback.classList.add('hidden');
+            quizFeedback.classList.add('invisible');
+            tipButton.classList.add('hidden');
+            quizTip.classList.add('hidden');
+            sentenceText.textContent = '_______ 주세요.';
+            sentenceRomanization.innerHTML = '&nbsp;';
+            sentenceRomanization.classList.add('invisible');
+            sentenceTranslation.innerHTML = '&nbsp;';
+            sentenceTranslation.classList.add('invisible');
+            playSentenceBtn.classList.add('hidden');
+            currentSentenceSound = null;
+        };
 
-            // Reset sentence
-            const sentenceLine = document.getElementById('sentence-line');
-            if (sentenceLine) {
-                sentenceLine.innerHTML = `<span class="font-bold">_______ 주세요.</span>`;
+        const handleOptionClick = (option) => {
+            const soundSrc = option.dataset.sound;
+            if (soundSrc) {
+                const audio = new Audio(soundSrc);
+                audio.play().catch(e => console.error("Audio play failed:", e));
             }
+            options.forEach(opt => opt.disabled = true);
+            const selectedWord = option.firstChild.textContent.trim();
+            const isCorrect = option.getAttribute('data-correct') === 'true';
+            sentenceText.textContent = `${selectedWord} 주세요.`;
+            currentSentenceSound = option.dataset.sentenceSound;
+            playSentenceBtn.classList.remove('hidden');
+            if (romanizationCheckbox && romanizationCheckbox.checked) {
+                const selectedRomanization = option.dataset.romanization;
+                sentenceRomanization.textContent = `[${selectedRomanization} juseyo]`;
+                sentenceRomanization.classList.remove('invisible');
+            }
+            const englishMeaning = option.dataset.english;
+            sentenceTranslation.textContent = `(Please give me ${englishMeaning}.)`;
+            sentenceTranslation.classList.remove('invisible');
+            const feedbackText = quizFeedback.querySelector('.font-bold');
+            const explanationText = quizFeedback.querySelector('.explanation-text');
+            if (isCorrect) {
+                feedbackText.textContent = 'Correct!';
+                feedbackText.className = 'font-bold text-green-500';
+                explanationText.innerHTML = '&nbsp;';
+                option.classList.add('border-green-500', 'bg-green-100');
+                tipButton.classList.remove('hidden');
+            } else {
+                feedbackText.textContent = 'Incorrect.';
+                feedbackText.className = 'font-bold text-red-500';
+                explanationText.textContent = 'The correct answer is "커피".';
+                option.classList.add('border-red-500', 'bg-red-100');
+                quizOptions.querySelector('[data-correct="true"]').classList.add('border-green-500', 'bg-green-100');
+            }
+            quizFeedback.classList.remove('invisible');
         };
 
         options.forEach(option => {
             option.addEventListener('click', () => handleOptionClick(option));
         });
-
         retryBtn.addEventListener('click', resetQuiz);
+        tipButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            quizTip.classList.toggle('hidden');
+        });
+        playSentenceBtn.addEventListener('click', () => {
+            if (currentSentenceSound) {
+                const audio = new Audio(currentSentenceSound);
+                audio.play().catch(e => console.error("Audio play promise rejected:", e));
+            }
+        });
     }
 
     // --- Image Modal Logic ---
@@ -216,28 +335,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (imageModal && modalImage && closeModalBtn) {
         clickableImages.forEach(img => {
             img.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent slide navigation if the parent is clickable
+                e.stopPropagation();
                 modalImage.src = img.src;
                 imageModal.classList.remove('hidden');
                 imageModal.classList.add('flex');
             });
         });
-
         const closeModal = () => {
             imageModal.classList.add('hidden');
             imageModal.classList.remove('flex');
-            modalImage.src = ''; // Clear src to avoid showing old image briefly
+            modalImage.src = '';
         };
-
         closeModalBtn.addEventListener('click', closeModal);
-
         imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) {
-                closeModal();
-            }
+            if (e.target === imageModal) closeModal();
         });
-
-        // Close with escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
                 closeModal();

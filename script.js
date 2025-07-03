@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             if (i === index) {
-                // Scroll the active slide to the top with a smooth animation
-                // A small timeout ensures this runs after the slide is fully active
-                setTimeout(() => {
+                // When the new slide's fade-in transition finishes, scroll it to the top.
+                // This is the most reliable way to handle the timing.
+                slide.addEventListener('transitionend', () => {
                     slide.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 0);
+                }, { once: true });
             }
         });
 

@@ -22,14 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             if (i === index) {
-                // When the new slide's fade-in transition finishes, scroll it to the top.
-                // This is the most reliable way to handle the timing.
-                slide.addEventListener('transitionend', (event) => {
-                    // Ensure we only scroll when the opacity transition is complete.
-                    if (event.propertyName === 'opacity') {
-                        slide.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }, { once: true });
+                // The CSS transition for opacity is 500ms. We will wait for that to finish
+                // before scrolling. This is a more direct and forceful approach.
+                setTimeout(() => {
+                    slide.scrollTo({ top: 0, behavior: 'auto' }); // 'auto' is instant
+                }, 500);
             }
         });
 
